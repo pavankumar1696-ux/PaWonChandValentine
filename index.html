@@ -473,10 +473,9 @@
             height: 100%;
             z-index: 300;
             background: #0a0a0a;
-            justify-content: flex-start;
+            justify-content: flex-end;
             align-items: center;
             flex-direction: column;
-            overflow-y: auto;
         }
 
         .monthiversary.active {
@@ -484,56 +483,68 @@
             animation: fadeIn 1s ease;
         }
 
-        .monthiversary-photo-wrapper {
-            position: relative;
-            width: 100%;
-            height: 75vh;
-            min-height: 400px;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .monthiversary-photo-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            animation: photoAppear 1.2s ease-out;
-        }
-
-        /* Dark gradient overlay on bottom of photo for text readability */
-        .monthiversary-photo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.7) 40%, transparent 100%);
-            pointer-events: none;
-        }
-
-        /* Top vignette */
-        .monthiversary-photo-overlay-top {
+        /* Photo as full background */
+        .monthiversary-photo-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 30%;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4) 0%, transparent 100%);
+            height: 75%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .monthiversary-photo-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            animation: monthPhotoReveal 1.5s ease-out;
+        }
+
+        @keyframes monthPhotoReveal {
+            from {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Dark gradient overlay on photo for text readability */
+        .monthiversary-photo-bg .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.6) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .monthiversary-photo-bg .photo-overlay-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, transparent 100%);
             pointer-events: none;
         }
 
         .monthiversary-content {
             position: relative;
             text-align: center;
-            padding: 30px 30px 50px;
-            margin-top: -60px;
+            padding: 20px 30px 40px;
             z-index: 2;
             animation: celebText 1s ease-out;
+            width: 100%;
         }
 
         .monthiversary-emoji {
-            font-size: 70px;
+            font-size: 60px;
             animation: celebHeart 1s ease-out;
             filter: drop-shadow(0 0 30px rgba(255, 200, 50, 0.5));
         }
@@ -541,63 +552,65 @@
         .monthiversary h1 {
             font-family: 'Dancing Script', cursive;
             color: #ff6b9d;
-            font-size: 3rem;
-            margin-top: 15px;
+            font-size: 2.8rem;
+            margin-top: 10px;
             text-shadow: 0 0 40px rgba(255, 107, 157, 0.5),
-                         0 2px 10px rgba(0, 0, 0, 0.8);
+                         0 2px 15px rgba(0, 0, 0, 0.9);
             animation: celebText 1s ease-out 0.3s both;
         }
 
         .monthiversary p {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 1.15rem;
-            margin-top: 12px;
-            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-top: 8px;
+            line-height: 1.6;
             animation: celebText 1s ease-out 0.6s both;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
         }
 
         .monthiversary-hearts {
-            font-size: 2.5rem;
-            margin-top: 20px;
+            font-size: 2rem;
+            margin-top: 12px;
             animation: celebText 1s ease-out 0.9s both;
-            letter-spacing: 10px;
+            letter-spacing: 8px;
         }
 
         .monthiversary-footer {
             font-family: 'Dancing Script', cursive;
             color: #ffd700 !important;
-            font-size: 1.6rem !important;
-            margin-top: 25px !important;
+            font-size: 1.5rem !important;
+            margin-top: 15px !important;
             text-shadow: 0 0 30px rgba(255, 215, 0, 0.4),
-                         0 2px 10px rgba(0, 0, 0, 0.8) !important;
+                         0 2px 15px rgba(0, 0, 0, 0.9) !important;
             animation: celebText 1s ease-out 1.2s both !important;
         }
 
         @media (max-width: 480px) {
-            .monthiversary-photo-wrapper {
-                height: 60vh;
-                min-height: 300px;
+            .monthiversary-photo-bg {
+                height: 65%;
             }
             .monthiversary h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             .monthiversary-emoji {
-                font-size: 50px;
+                font-size: 45px;
             }
             .monthiversary p {
-                font-size: 1rem;
-                padding: 0 15px;
+                font-size: 0.9rem;
+                padding: 0 10px;
             }
             .monthiversary-footer {
-                font-size: 1.3rem !important;
+                font-size: 1.2rem !important;
             }
             .monthiversary-content {
-                padding: 20px 20px 40px;
-                margin-top: -40px;
+                padding: 15px 20px 30px;
+            }
+            .monthiversary-hearts {
+                font-size: 1.6rem;
+                letter-spacing: 5px;
             }
         }
 
@@ -690,10 +703,10 @@
 
     <!-- Monthiversary Screen -->
     <div class="monthiversary" id="monthiversary">
-        <div class="monthiversary-photo-wrapper">
+        <div class="monthiversary-photo-bg">
             <img src="photo7.jpg" alt="Us Together 💕">
-            <div class="monthiversary-photo-overlay-top"></div>
-            <div class="monthiversary-photo-overlay"></div>
+            <div class="photo-overlay-top"></div>
+            <div class="photo-overlay"></div>
         </div>
         <div class="monthiversary-content">
             <div class="monthiversary-emoji">🥂</div>
